@@ -68,19 +68,49 @@ function prepareMsg() {
 
   */
 
-  message = pb.lookupType("mypackage.MyMessage").create();
-  prepareObject();
-}
-
-function prepareObject() {
+  // message = pb.lookupType("mypackage.MyMessage").create();
 
   /*
   message is a JS model which is assigned above.
   From the message we can read/write the properties like normally.
   */
+  // message.key = "keyName"
+  // message.value = 100;
 
-  message.key = "keyName"
-  message.value = 100;
+
+  /*
+  we can use create like this parameter passing.
+
+  The difference between createObject and fromObject is.
+
+  Fromobject automatically converts to the datatype, which is mentioned in proto.
+  But create method won't convert.
+
+  Example:-
+  messageLookup.create({key: 100, value: 100}) -->  // key 100 will throw an error like type mismatch
+  messageLookup.fromObject({key: 100, value: 100}) --> key 100 will change as string.
+
+  From the, key is assigned as a stirng in proto.
+  So while creating time, we should assign the value with it's respective type.
+
+  But, in fromObject method, we have assigned a integer value 100.
+  But the method will convert the type, Which is mentioned in proto file.
+
+  So FromObject will update the type automatically.
+  */
+
+  // Comment the lines above and uncomment this line to check
+  // let messageLookup = pb.lookupType("mypackage.MyMessage");
+  // message = messageLookup.create({key: "keyName", value: 100})
+
+  // Comment the lines above and uncomment this line to check
+  let messageLookup = pb.lookupType("mypackage.MyMessage");
+  message = messageLookup.fromObject({key: 100, value: 100})
+
+  prepareObject();
+}
+
+function prepareObject() {
 
   /*
   NetworkCall is a message, in our protofile.

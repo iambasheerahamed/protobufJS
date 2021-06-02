@@ -7,5 +7,5 @@ Check the codes to more info :)
 
 Run the server using *node server.js* command.
 
-Check this out to more information:-
+Check this out for more information:-
   https://github.com/protobufjs/protobuf.js
